@@ -79,7 +79,7 @@ export.A = '대문자입니다.';
 Process.nextTick은 setImmediate나 setTimeout보다 먼저 실행
 (Promise도 nextTick처럼 다른 콜백들보다 우선시 됨)
 
-**process.nextTick과 promise를 마이크로태스크라고 부름 **
+**process.nextTick과 promise를 마이크로태스크라고 부름**
 
 
 
