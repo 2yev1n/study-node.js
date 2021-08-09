@@ -200,3 +200,17 @@ Process.nextTick은 setImmediate나 setTimeout보다 먼저 실행
 * util.promisify(바꿀 함수) : 콜백 패턴을 프로미스 패턴으로 바꿈
 * util.callbackify(바꿀 함수) : 프로미스를 콜백으로 바꿈
 
+
+
+#### worker_threads :
+
+노드에서 멀티 스레드 방식으로 작업이 가능함
+
+* **isMainThread**를 통해 현재 코드가 메인(부모)스레드나 생성한 워커 스레드에서 실행되는지 구분됨
+  * 메인 스레드에서는 **new Worker**를 통해 현재 파일(__filename)을 워커 스레드에서 실행시키고 있음(물론 현재 파일의 else 부분만 워커 스레드에서 실행)
+* **worker.postMessage** : 부모가 워커를 생성한 후 워커에게 데이터를 보낼 수 있음
+* **parentPort.on('message')** : 워커가 부모로부터 데이터를 받음
+* **parentPort.postMessage** : 워커가 부모에게 데이터를 보낼 수 있음
+* **worker.on('message')** : 부모가 워커에게 데이터를 받음
+* **워커에서 on 메서드를 사용할 때는 parentPort.close()로 직접 워커를 종료해야 함**
+
