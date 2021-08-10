@@ -202,7 +202,7 @@ Process.nextTick은 setImmediate나 setTimeout보다 먼저 실행
 
 
 
-#### worker_threads :
+#### worker_threads : 
 
 노드에서 멀티 스레드 방식으로 작업이 가능함
 
