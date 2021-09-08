@@ -3,7 +3,7 @@ const sequelize = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
     return sequelize.define("user", {
         email: {
-            type:DataTypes.STRING(20),
+            type:DataTypes.STRING(35),
             primaryKey: true,
             allowNull: false,
             unique: true,

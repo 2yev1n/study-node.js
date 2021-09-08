@@ -4,12 +4,14 @@ const router = require("./routes");
 const { sequelize } = require("./models");
 const PORT = process.env.PORT || 3000;
 
+require("dotenv").config();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
 app.use("/", router);
 
-require("dotenv").config();
+app.set("jwt-secret", process.env.JWT_KEY);
 
 sequelize.sync({ force: false })
     .then(() => {
