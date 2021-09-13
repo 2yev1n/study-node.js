@@ -1,14 +1,16 @@
-const user = require("../models/user");
+const user = require("../models/user");     
 const jwt = require("jsonwebtoken");
 const { User } = require("../models");
 const { connect } = require("../routes");
 
+const crypto = require('crypto');
+
 const sign_up = async(req, res) => {
-    const {email, name, password} = req.body;
+    const {email, name, password} = req.body;   // 요청 받는 값들
     // const email = req.body.email;
     // const name = req.body.name;
     // const password = req.body.password;
-    
+
     try{
         await User.create({
             email,
@@ -43,7 +45,7 @@ const login = async (req, res) => {
                         name : user.name,
                     }, secretkey,
                     {
-                        expiresIn: "1h",
+                        expiresIn: "1h",    //  유지시간 
                     }
                 );
             res.status(200).json({

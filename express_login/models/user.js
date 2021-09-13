@@ -4,9 +4,9 @@ module.exports = (sequelize, DataTypes) => {
     return sequelize.define("user", {
         email: {
             type:DataTypes.STRING(35),
-            primaryKey: true,
+            primaryKey: true,       // 기본키
             allowNull: false,
-            unique: true,
+            unique: true,       // 고유 값
         },
         name: {
             type: DataTypes.STRING(5),
