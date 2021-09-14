@@ -2,6 +2,7 @@ const user = require("../models/user");
 const jwt = require("jsonwebtoken");
 const { User } = require("../models");
 const { connect } = require("../routes");
+const Random = require("../routes/mail");
 
 const crypto = require('crypto');
 
