@@ -2,12 +2,13 @@ const router = require("express")();
 const mailer = require("../controller/mail");
 
 router.post("/mail", (req, res) => {
+    let authNum = Math.random().toString().substr(2,6);
     const {email} = req.body;
 
     const emailParam = {
         toEmail: email,
         subject: "New Email",
-        text: `nodemailer`
+        text: authNum
     };
 
     mailer.sendGamil(emailParam);

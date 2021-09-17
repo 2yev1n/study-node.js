@@ -2,7 +2,7 @@ const user = require("../models/user");
 const jwt = require("jsonwebtoken");
 const { User } = require("../models");
 const { connect } = require("../routes");
-const Random = require("../routes/mail");
+const { mailer } = require("../routes/mail");
 
 const crypto = require('crypto');
 
@@ -14,10 +14,10 @@ const sign_up = async(req, res) => {
 
     try{
         await User.create({
-            email,
-            name,
-            password,
-        });
+                email,
+                name,
+                password,
+            });
         res.status(200).json({
             message: "성공"
         });
