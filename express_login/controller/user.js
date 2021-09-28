@@ -4,8 +4,6 @@ const { User } = require("../models");
 const { connect } = require("../routes");
 const { mailer } = require("../routes/mail");
 
-const crypto = require('crypto');
-
 const sign_up = async(req, res) => {
     const {email, name, password} = req.body;   // 요청 받는 값들
     // const email = req.body.email;
