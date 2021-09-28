@@ -1,9 +1,11 @@
 const router = require("express")();
 const mailer = require("../controller/mail");
+const Check = require("./check");
+
+let authNum = Math.random().toString().substr(2,6);
 
 router.post("/mail", (req, res) => {
-    let authNum = Math.random().toString().substr(2,6);
-    const {email} = req.body;
+    const { email } = req.body;
 
     const emailParam = {
         toEmail: email,
@@ -16,4 +18,6 @@ router.post("/mail", (req, res) => {
     res.status(200).send("이메일 발송 성공");
 });
 
-module.exports = router;
+router.use("/mail", Check);
+
+module.exports = router, authNum;
