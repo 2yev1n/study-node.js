@@ -1,8 +1,8 @@
 const router = require("express")();
 const User = require("./user");
-const Mailer = require("./mail");
+const {mail} = require("./mail");
 
 router.use("/user", User);
-router.use("/user", Mailer);
+router.use("/user", mail);
 
 module.exports = router;
