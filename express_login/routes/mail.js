@@ -1,11 +1,12 @@
 const router = require("express")();
 const mailer = require("../controller/mail");
-const Check = require("./check");
 
-const authNum = Math.random().toString().substr(2,6);
+let authNum;
 
 router.post("/mail", (req, res) => {
     const { email } = req.body;
+    
+    authNum = Math.random().toString().substr(2,6);
 
     const emailParam = {
         toEmail: email,
@@ -19,9 +20,32 @@ router.post("/mail", (req, res) => {
     console.log(authNum);
 });
 
-router.use("/mail", Check);
+const check = async(req, res) => {
+    const { number } = req.body;
+    try{
+        console.log(authNum);
+        console.log(number);
+        
+        if(authNum === number) {
+            res.status(200).json({
+                message: "인증번호 일치"
+            });
+        } else {
+            res.status(409).json({
+                message: "인증번호 불일치"
+            });
+        }
+    } catch(err) {
+        res.status(409).json({
+            messagse: "오류"
+        });
+    }
+};
+
+
+router.use("/mail", check);
 
 module.exports = {
-    mail:router,
-    authNum:authNum
-}
+    Mail:router,
+    check
+};
