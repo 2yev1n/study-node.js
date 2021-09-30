@@ -1,5 +1,5 @@
 const router = require("express")();
-const controller = require("../controller/check");
+const controller = require("./mail");
 
 router.post("/check", controller.check);
 
