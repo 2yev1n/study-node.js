@@ -9,7 +9,7 @@ const sign_up = async(req, res) => {
     // const email = req.body.email;
     // const name = req.body.name;
     // const password = req.body.password;
-
+    
     try{
         await User.create({
                 email,
