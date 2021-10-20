@@ -7,13 +7,13 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             allowNull: false,
         },
-        title: {
-            type: DataTypes.STRING(30),
-            allowNull:true,
+        age: {
+            type: DataTypes.INTEGER(2),
+            allowNull:false,
         },
-        text: {
-            type: DataTypes.STRING(50),
-            allowNull: true,
+        name: {
+            type: DataTypes.STRING(5),
+            allowNull: false,
         },
     });
 };
