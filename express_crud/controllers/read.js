@@ -20,7 +20,7 @@ const readAll = async(req, res) => {
         res.status(200).json(users);
     }
     catch(err) {
-        res.status(404).json({
+        res.status(400).json({
             message:"오류"
         });
         console.error(err);
