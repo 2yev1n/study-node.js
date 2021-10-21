@@ -9,6 +9,7 @@
     * name : STRING(5)
 * Read(읽기)
   * readAll(전체 조회) : findAll
+    * ​	createdAt DESC순으로 정리
   * readOne(선택 조회) : findOne
 * Update(갱신)
   * update(정보 수정) : update
