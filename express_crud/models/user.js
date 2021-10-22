@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         },
         age: {
-            type: DataTypes.INTEGER(2),
+            type: DataTypes.INTEGER,
             allowNull:false,
         },
         name: {
