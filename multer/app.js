@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const router = require("./controllers/user");
+const router = require("./routes");
 const fs = require("fs");
 const PORT = process.env.PORT || 8000;
 
