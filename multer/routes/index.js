@@ -1,6 +1,17 @@
-const app = require("express")();
+const express = require("express");
+const router = express.Router()
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
+
+const storage = multer.diskStorage({
+    destination(req, file, cb) {
+        cb(null, 'uploadedFiles/');
+    },
+    filename(req, file, cb) {
+        cb(null, `${Date.now()}__${file.originalname}`);
+    },
+});
+const uploadWithOriginalFilename = multer({ storage: storage });
 
 app.post('/profile', upload.single("avatar"), function (req, res, next) {
 });
