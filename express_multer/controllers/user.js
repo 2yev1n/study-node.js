@@ -11,12 +11,12 @@ const user = {
         catch(err) {
             if (image === undefined) {
             return res.status(400).json({
-                message: "이미자가 존재하지 않습니다."
-            });
+                message: "이미지가 존재하지 않습니다."
+            }),
             console.error(err);
             }
         }
     }
 };
 
-module.exports = user;
+module.exports = { user };
