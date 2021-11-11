@@ -1,10 +1,10 @@
 const { Post } = require("../models");
 
 const deletePost = async(req, res) => {
-    const { id, title } = req.body;
+    const { id } = req.body;
 
     try{
-        await Post.destroy({ where : {id : id, title : title } });
+        await Post.destroy({ where : { id : id } });
 
         res.status(200).json({
             messgae: "게시물 삭제 성공"
