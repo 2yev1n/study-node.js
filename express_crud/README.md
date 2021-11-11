@@ -1,4 +1,4 @@
-# node.js express sequelize  MySQl 로 만드는 CRUD
+# node express sequelize  MySQL 로 만드는 USER 관리 CRUD
 
 ### user 관리
 
