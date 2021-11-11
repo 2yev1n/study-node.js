@@ -3,14 +3,16 @@ const sequelize = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
     return sequelize.define('Post', {
         id : {
-            type: DataTypes.STRING(5),
+            type: DataTypes.INTEGER(),
             primaryKey: true,
-            allowNull: false
+            allowNull: false,
+            unique: true,
+            autoIncrement: true,
         },
-        nickname : {
+        writer : {
             type: DataTypes.STRING(45),
             foreignKey: true,
-            allowNull: true
+            allowNull: false,
         },
         content: {
             type: DataTypes.TEXT(),
