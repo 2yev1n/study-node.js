@@ -5,11 +5,12 @@ const updatePost = async(req, res) => {
 
     try{
         await Post.update({
+            title : title,
             content : content,
             filed : filed
-        },
+        },  
         {
-            where : { id : id, title : title }
+            where : { id : id }
         });
         res.status(200).json({
             message: "게시글 수정 완료"
