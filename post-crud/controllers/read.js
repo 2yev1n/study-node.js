@@ -37,7 +37,21 @@ const readOnePost = async(req, res) => {
     }
 };
 
+const Allviews = async(req, res) => {
+
+    try{
+        let posts = await Post.findAll({ order: [['createdAt', 'DESC']] });
+        res.status(200).json(posts);
+    } catch(err) {
+        res.status(400).json({
+            message : "게시물 없음"
+        });
+        console.error(err);
+    }
+};
+
 module.exports = {
     readAllPost,
-    readOnePost
+    readOnePost,
+    Allviews
 };
