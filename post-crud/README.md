@@ -15,11 +15,11 @@
 
 * CREATE(생성)
   * 게시글 생성 : createPost
-    * post-id : INTEGER, PK, UQ, Al(자동증가 · 생성), NN
-    * writer : VARCHAR(45), NN
-    * title : VARCHAR(30)
-    * content : TEXT
-    * filed : VARCHAR(10)
+    * post-id : Al(자동증가 · 생성)
+    * writer
+    * title
+    * content
+    * filed
     * picture
 
 * READ(조회)
