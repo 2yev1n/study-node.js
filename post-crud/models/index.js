@@ -5,8 +5,8 @@ const db = {};
 
 const sequelize = new Sequelize(
   config.database,
-  config.id,
-  config.nikname,
+  config.username,
+  config.password,
   config
 );
 
