@@ -16,7 +16,7 @@ const readOne = async(req, res) => {
 
 const readAll = async(req, res) => {
     try{
-        let users = await User.findAll({ order: [['createdAt', 'DESC']]});
+        let users = await User.findAll({ order: [['createdAt', 'DESC']] });
         res.status(200).json(users);
     }
     catch(err) {
