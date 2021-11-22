@@ -1,13 +1,10 @@
-const user = require("../models/user");     
 const jwt = require("jsonwebtoken");
 const { User } = require("../models");
-const { connect } = require("../routes");
-const { mailer } = require("../routes/mail");
 
 const sign_up = async(req, res) => {
     const {email, name, password} = req.body;   // 요청 받는 값들
     // const email = req.body.email;
-    // const name = req.body.name;
+    // const name = req.body.name; 
     // const password = req.body.password;
     
     try{
@@ -39,7 +36,6 @@ const login = async (req, res) => {
             if(user.password === password) {
                 const accessToken = jwt.sign(
                     {
-                        id : user.id,
                         email : user.email,
                         name : user.name,
                     }, secretkey,
