@@ -1,13 +1,7 @@
 const { Post } = require("../models");
 
-// let Id = 0;
-
 const createPost = async(req, res) => {
     const { writer, title, content, filed } = req.body;
-
-    // Id = Id + 1;
-
-    // // Id = Post.max('id').then(max => {});
 
     try{
         await Post.create({
