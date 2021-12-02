@@ -3,7 +3,7 @@ const util = require("./util");
 
 const user = {
     uploadProfile: async (req, res) => {
-        const image = req.file.path;
+        const image = req.file;
         console.log(req.file);
         try{
             if (image === undefined) {
