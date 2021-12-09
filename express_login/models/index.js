@@ -5,7 +5,7 @@ const db = {};
 
 const sequelize = new Sequelize(
     config.database,
-    config.email,       // * name 추가하면 왜 안되는지
+    config.username,       // * name 추가하면 왜 안되는지
     config.password,
     config
 );
