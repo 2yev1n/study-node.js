@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const { User } = require("../models");
 const crypto = require("crypto");
 
-const salt = crypto.randomBytes(128).toString('base64');
+const salt = 57835783;
 
 const sign_up = async(req, res) => {
     const {email, name, password} = req.body;   // 요청 받는 값들
