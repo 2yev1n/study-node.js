@@ -13,6 +13,7 @@ app.use(express.urlencoded({ extended: false }));       // extended는 중첩된
 app.use("/", router);   // router 사용하기 위함
 
 app.set("jwt-secret", process.env.JWT_KEY);
+app.set("refresh-secret", process.env.REFRESH_KEY);
 
 sequelize.sync({ force: false })    // force가 true면 원래 있던 테이블 drop후 생성
     .then(() => {
