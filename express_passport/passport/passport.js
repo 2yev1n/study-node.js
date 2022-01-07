@@ -1,5 +1,6 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const FacebookStrategy = require("passport-facebook").Strategy;
 const User = require("../models/user");
 
 module.exports = () => {
@@ -8,7 +9,7 @@ module.exports = () => {
         passwordField: "password",
         session: true,
         passReqToCallback: false
-    }, (user_id, password, done) => {
+    }, async (user_id, password, done) => {
         try {
             const user = await User.findOne({
                 where: { user_id }
@@ -29,4 +30,27 @@ module.exports = () => {
             done(error);
         }
     }));
+
+    passport.use(new FacebookStrategy({
+        clientID: process.env.FACEBOOK_ID,
+        clientSecret: process.env.FACKBOOK_SECRET,
+        callbackURL: "http://localhost:8080/"
+    }, async (req, accessToken, refreshToken, profile, done) => {
+        try{
+            const user = await User.findOne({
+                where: { user_id: profile.id },
+            });
+            if(!user) {
+                const newUser = await User.create({
+                    user_id: profile.id
+                });
+            };
+            if(user) {
+                done(null, user);
+            }
+        } catch(err) {
+            console.error(err);
+            done(error);
+        }
+    }))
 };
