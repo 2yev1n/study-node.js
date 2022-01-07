@@ -11,7 +11,7 @@ router.post("/login", passport, authenticate("local", {
 router.get("/auth/facebook", 
     passport.authenticate("facebook", {
         authType: "rerequest", 
-        cope: ["public_profile", "email"]
+        scope: ["public_profile", "email"]
     })
 );
 
@@ -23,3 +23,5 @@ router.get("/auth/facebook/callback",
         res.redirect("/");
     }
 );
+
+module.exports = router;
