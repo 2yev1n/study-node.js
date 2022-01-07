@@ -1,11 +1,10 @@
 const express = require("express");
 const app = express();
-const cookieParser = require("cookie-parser");
-const path = requrire("path");
-const session = requrie("express-session");
+const path = require("path");
+const session = require("express-session");
 const passport = require("passport");
-const passportConfig = require("./passport");
-const router = require("./routes");
+const passportConfig = require("./passport/passport");
+const router = require("./routes/login");
 const PORT = process.env.PORT||8080;
 
 require("dotenv").config();
