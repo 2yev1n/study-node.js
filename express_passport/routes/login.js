@@ -2,10 +2,10 @@ const router = require("express")();
 const { authenticate } = require("passport");
 const passport = require("passport");
 
-router.post("/login", passport, authenticate("local", {
-    failureRedirect: '/'
+router.post('/login', passport.authenticate('local', {
+  failureRedirect: '/'
 }), (req, res) => {
-    res.redirect('/');
+  res.redirect('/');
 });
 
 router.get("/auth/facebook", 
