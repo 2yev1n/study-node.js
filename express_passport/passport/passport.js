@@ -34,7 +34,7 @@ module.exports = () => {
     passport.use(new FacebookStrategy({
         clientID: process.env.FACEBOOK_ID,
         clientSecret: process.env.FACKBOOK_SECRET,
-        callbackURL: "http://localhost:8080/"
+        callbackURL: "http://localhost:8080/auth/facebook/callback"
     }, async (req, accessToken, refreshToken, profile, done) => {
         try{
             const user = await User.findOne({
