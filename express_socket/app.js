@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 8000;
 let rooms = [];
 
 app.get('/', (req, res) => {
+    console.log("유저가 접속했니다.");
     res.sendFile(__dirname + '/index.html');
 });
 
