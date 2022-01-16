@@ -3,8 +3,9 @@ const app = express();
 const path = require("path");
 const session = require("express-session");
 const passport = require("passport");
-const passportConfig = require("./passport/passport");
-const router = require("./routes/login");
+const passportConfig = require("./passport");
+const cookieParser = require("cookie-parser");
+const router = require("./routes/index");
 const PORT = process.env.PORT||8080;
 
 require("dotenv").config();
@@ -12,7 +13,15 @@ require("dotenv").config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false })); 
 
-app.use(session({ secret: process.env.SESSION, resave: true, saveUninitialized: false}));
+app.use(cookieParser(process.env.COOKIE_ID));
+app.use(
+    session({
+        secret: process.env.SESSION, 
+        resave: true, 
+        saveUninitialized: false
+    })
+);
+
 app.use(passport.initialize());
 app.use(passport.session());
 
