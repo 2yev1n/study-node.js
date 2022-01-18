@@ -13,23 +13,27 @@ module.exports = () => {
             const exUser = await User.findOne({
                  where: { email } 
             });
+            console.log(exUser);
             if (exUser) {
-                await bcrypt.compare(password, exUser.password, (err, same) => {
+                await bcrypt.compare(JSON.stringify(password), exUser.password, (err, same) => {
                     if (err) {
-                        done(null, false, {
+                        console.log(exUser.password);
+                        console.log(password);
+                        return done(null, false, {
                             message: "비밀번호가 일치하지 않음"
                         });
                     }
                     else if (same) {
-                        done(null, exUser);
+                        console.log(exUser);
+                        return done(null, exUser);
                     }
                 });
             } else {
-                done(null, false, { message : "찾을 수 없는 회원입니다." });
+                return done(null, false, { message : "찾을 수 없는 회원입니다." });
             }
         } catch (err) {
             console.error(err);
-            done(err);
+            return done(err);
         }
     }));
 };
