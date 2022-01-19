@@ -11,7 +11,7 @@ module.exports = () => {
     });
 
     passport.deserializeUser((user, done) => {
-        done(null, user);
+        return done(null, user);
     });
 
     local();
