@@ -1,6 +1,6 @@
 # node express sequelize MySQL 로 만드는 POST 관리 CRUD
 
-### DB 명세서
+### DB
 
 * post-id : INTEGER, PK, UQ, Al, NN
 * writer : VARCHAR(45), NN
