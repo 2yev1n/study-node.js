@@ -10,7 +10,7 @@ const searchPost = async (req, res) => {
                 [Op.or]: [
                     {
                         title: {
-                            [Op.like]: "%" + searchWord + "%"
+                            [Op.like]: "%" + searchWord + "%" // `%${searchWord}%`로 사용해도 됨.
                         }
                     },
                     {
