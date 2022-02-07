@@ -2,7 +2,9 @@ const app = require("express")();
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 const PORT = process.env.PORT || 8000;
-let rooms = [];
+
+let rooms = ['room1', 'room2'];
+let a = 0;
 
 app.get('/', (req, res) => {
     console.log("유저가 접속했니다.");
@@ -15,37 +17,22 @@ io.on('connection', (socket)=>{
         io.emit('response_message', msg);
     });
 
-    socket.on("req_join_room", async (msg) => {
-        let roomName = 'Room_' + msg;
-        if(!rooms.includes(roomName)) {
-            rooms.push(roomName);
-        } else { }
-        socket.join(roomName);
-        io.to(roomName).emit('noti_join_room', "방에 입장하셨습니다.");
+    socket.on("joinRoom", async (num, msg) => {
+        socket.join(rooms[num], () => {
+            console.log("유저 방에 입장");
+            io.to(roomName).emit('joinRoom', num, name);
+        });
     });
 
-    socket.on("req_room_message", async(msg) => {
-        let userCurrentRoom = getUserCurrentRoom(socket);
-        io.to(userCurrentRoom).emit('noti_room_message', msg);
+    socket.on("chat message", async(num, name, msg) => {
+        a = num;
+        io.to(rooms[a]).emit('chat message', name, msg);
     });
 
     socket.on('disconnect', async () => {
         console.log('유저 연결 끊김');
     });
 });
-
-function getUserCurrentRoom(socket){
-    let currentRoom = '';
-    let socketRooms = Object.keys(socket.rooms);
-
-    for(let i = 0 ; i < socketRooms.length; i++) {
-        if(socketRooms[i].indexOf('Room_') !== -1) {
-            currentRoom = socketRooms[i];
-            break;
-        } 
-    }
-    return currentRoom;
-}
 
 http.listen(PORT, () => {
     console.log(PORT, "번 포트에서 대기 중");
