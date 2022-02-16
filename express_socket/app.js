@@ -2,9 +2,12 @@ const app = require("express")();
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
 const PORT = process.env.PORT || 8000;
-let rooms = [];
 
+let rooms = [];
 let roomName;
+
+let num = 0;
+
 app.get('/', (req, res) => {
     console.log("유저가 접속했니다.");
     res.sendFile(__dirname + '/index.html');
@@ -13,7 +16,7 @@ app.get('/', (req, res) => {
 io.on('connection', (socket)=>{
     socket.on('request_message', (msg) => {
         // response_message로 접속중인 모든 사용자에게 msg 를 담은 정보를 방출한다.
-        io.emit('response_message', msg);
+        io.emit('response_message', '익명 : ' +  msg);
     });
 
     socket.on("req_join_room", async (msg) => {
@@ -21,13 +24,14 @@ io.on('connection', (socket)=>{
         if(!rooms.includes(roomName)) {
             rooms.push(roomName);
         }
+        num++;
         socket.join(roomName);
-        io.to(roomName).emit('noti_join_room', "방에 입장하셨습니다.");
+        io.to(roomName).emit('noti_join_room', num + "번 님이 방에 입장하셨습니다.");
     });
 
     socket.on("req_room_message", async(msg) => {
         // let userCurrentRoom = getUserCurrentRoom(socket);
-        io.to(roomName).emit('noti_room_message', msg);
+        io.to(roomName).emit('noti_room_message', num + ' : ' + msg);
     });
 
     socket.on('disconnect', async () => {
