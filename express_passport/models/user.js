@@ -15,7 +15,6 @@ module.exports =(sequelize, Datatypes) => {
       type: Datatypes.STRING(36),
       allowNull: false,
       primaryKey: true,
-      unique: true,
     },
     provider: {
       type: Datatypes.STRING(10),
@@ -29,7 +28,7 @@ module.exports =(sequelize, Datatypes) => {
     modelName: 'User',
     tableName: 'users',
     paranoid: false,
-    charset: 'utf8',
-    collate: 'utf8_general_ci',
+    charset: 'UTF8MB4',
+    collate: 'UTF8MB4_GENERAL_CI',
   });
 };
