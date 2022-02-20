@@ -13,16 +13,16 @@ module.exports = () => {
         
         try{
             const exUser = await User.findOne({
-                where: { userId: profile.id,
-                         provider: 'kakao' },
+                where: { snsID: profile.id,
+                         provider: 'facebook' },
             });
             if(user) {
                 done(null, exUser);
             } 
             else if (!exUser) {
                 const newUser = await User.create({
-                    userId: profile.id,
-                    provider: 'kakao'
+                    snsID: profile.id,
+                    provider: 'facebook'
                 });
                 done(null, newUser);
             };
