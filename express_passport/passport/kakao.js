@@ -22,7 +22,7 @@ module.exports = () => {
         try {
             const exUser = await User.findOne({
                 where: {
-                    userID : profile.id,
+                    snsID : profile.id,
                     provider: 'kakao'
                 },
             });
@@ -31,7 +31,7 @@ module.exports = () => {
             } else if (!exUser) {
                 const newUser = await User.create({
                     email: profile._json.kakao_account.email,
-                    userId: profile.id,
+                    snsID: profile.id,
                     provider: 'kakao',
                     password: hashPassword
                 });
