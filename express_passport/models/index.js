@@ -15,9 +15,24 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 db.User = require("./user")(sequelize, Sequelize);
-db.Board = require("./board")(sequelize, Sequelize);
+db.Post = require("./post")(sequelize, Sequelize);
+db.Hashtag = require("./hashtag")(sequelize, Sequelize);
 
-db.User.hasMany(db.Board, { foreignKey : "writer", targetKey : "email" });
-db.Board.belongsTo(db.User, { foreignKey : "writer" });
+db.User.hasMany(db.Post, { foreignKey: "UserID", targetKey: "id" });
+db.Post.belongsTo(db.User, { foreignKey: "UserID" });
+
+db.Post.hasMany(db.Hashtag, { foreignKey: "postID", targetKey : "id" });
+db.Hashtag.belongsTo(db.Post, { foreignKey: "postID" });
+
+db.User.belongsToMany(db.User, {
+  foreignKey: 'followingId',
+  as: 'Followers',
+  through: 'follows',
+});
+db.User.belongsToMany(db.User, {
+  foreignKey: 'follwerld',
+  as: "Followings",
+  through: 'follows',
+});
 
 module.exports = db;
