@@ -2,7 +2,13 @@ const Sequelize = require('sequelize');
 
 module.exports =(sequelize, Datatypes) => {
   return sequelize.define("user", {
-    userId: {
+    id: {
+      type: Datatypes.INTEGER,
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    snsID: {
       type: Datatypes.STRING(15),
       allowNull: true,
       unique: true
@@ -14,7 +20,7 @@ module.exports =(sequelize, Datatypes) => {
     email: { 
       type: Datatypes.STRING(36),
       allowNull: false,
-      primaryKey: true,
+      unique: true,
     },
     provider: {
       type: Datatypes.STRING(10),
