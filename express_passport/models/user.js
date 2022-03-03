@@ -1,40 +1,49 @@
 const Sequelize = require('sequelize');
 
-module.exports =(sequelize, Datatypes) => {
-  return sequelize.define("user", {
-    id: {
-      type: Datatypes.INTEGER,
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true,
-    },
-    snsID: {
-      type: Datatypes.STRING(15),
-      allowNull: true,
-      unique: true
-    },
-    password: {
-      type: Datatypes.STRING(),
-      allowNull: false,
-    },
-    email: { 
-      type: Datatypes.STRING(36),
-      allowNull: false,
-      unique: true,
-    },
-    provider: {
-      type: Datatypes.STRING(10),
-      allowNull: false,
-      defaultValue: "local",
-    }
-  },
-  {
-    sequelize,
-    timestamps: true,
-    modelName: 'User',
-    tableName: 'users',
-    paranoid: false,
-    charset: 'UTF8MB4',
-    collate: 'UTF8MB4_GENERAL_CI',
-  });
+module.exports = class User extends Sequelize.Model {
+  static init(sequelize) {
+    return super.init({
+      email: {
+        type: Sequelize.STRING(40),
+        allowNull: true,
+        unique: true,
+      },
+      password: {
+        type: Sequelize.STRING(100),
+        allowNull: true,
+      },
+      provider: {
+        type: Sequelize.STRING(10),
+        allowNull: false,
+        defaultValue: 'local',
+      },
+      snsID: {
+        type: Sequelize.STRING(30),
+        allowNull: true,
+      },
+    }, {
+      sequelize,
+      timestamps: true,
+      underscored: false,
+      modelName: 'User',
+      tableName: 'users',
+      paranoid: true,
+      charset: 'utf8',
+      collate: 'utf8_general_ci',
+    });
+  }
+
+  static associate(db) {
+    db.User.hasMany(db.Post);
+    db.User.belongsToMany(db.User, {
+      foreignKey: 'followingId',
+      as: 'Followers',
+      through: 'Follow',
+    });
+    db.User.belongsToMany(db.User, {
+      foreignKey: 'followerId',
+      as: 'Followings',
+      through: 'Follow',
+    });
+  }
 };
