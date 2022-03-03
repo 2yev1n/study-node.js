@@ -6,15 +6,22 @@ const session = require("express-session");
 const passport = require("passport");
 const passportConfig = require("./passport");
 const cookieParser = require("cookie-parser");
-const router = require("./routes/index");
 const PORT = process.env.PORT||8080;
 
+const { sequelize } = require("./models");
+
 require("dotenv").config();
+
+const auth = require("./routes/auth");
+const post = require("./routes/post");
+const page = require("./routes/page");
+const user = require("./routes/user");
 
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false })); 
-
+app.use(express.static(path.join(__dirname, 'public')));
+app.use("/img", express.static(path.join(__dirname, 'uploads')));
 app.use(cookieParser(process.env.COOKIE_ID));
 app.use(
     session({
@@ -31,9 +38,18 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/", router);
+app.use("/page", page);
+app.use("/post", post);
+app.use("/auth", auth);
+app.use("/user", user);
 
-const { sequelize } = require("./models");
+
+app.use((req, res, next) => {
+    const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
+    error.status = 494;
+    next(error);
+})
+
 
 sequelize.sync({ force: false })
     .then(() => {
