@@ -7,6 +7,7 @@ router.use((req, res, next) => {
     res.locals.followerCount = 0;
     res.locals.follwingCount = 0;
     res.locals.followerList = [];
+    next();
 });
 
 router.get("/profile", isLoggedIn, (req, res) => {
