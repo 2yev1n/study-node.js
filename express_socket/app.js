@@ -6,7 +6,8 @@ const PORT = process.env.PORT || 8000;
 let rooms = [];
 let roomName;
 
-let num = 0;
+let num = [];
+let count = 0;
 
 app.get('/', (req, res) => {
     console.log("유저가 접속했니다.");
@@ -24,14 +25,19 @@ io.on('connection', (socket)=>{
         if(!rooms.includes(roomName)) {
             rooms.push(roomName);
         }
-        num++;
+
+        num.push(count++);
+        const number = num[num.length - 1];
+        
         socket.join(roomName);
-        io.to(roomName).emit('noti_join_room', num + "번 님이 방에 입장하셨습니다.");
+        io.to(roomName).emit('noti_join_room', number + "번 님이 방에 입장하셨습니다.");
     });
 
     socket.on("req_room_message", async(msg) => {
         // let userCurrentRoom = getUserCurrentRoom(socket);
-        io.to(roomName).emit('noti_room_message', num + ' : ' + msg);
+        const number = num[num.length - 1];
+
+        io.to(roomName).emit('noti_room_message', number + ' : ' + msg);
     });
 
     socket.on('disconnect', async () => {
