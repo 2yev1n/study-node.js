@@ -1,11 +1,24 @@
 import express, { Request, Response, NextFunction } from 'express';
 import { sequelize } from './config/config';
+import morgan from "morgan";
+import path from 'path';
+import * as dotenv from "dotenv";
+import router from './routes/post';
+
 const app = express();
 const PORT = 3000;
+
+dotenv.config({ path: path.join(__dirname, "../env") });
+app.use(morgan("dev"));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 app.get("/", (req: Request, res: Response, next: NextFunction) => {
     res.send("welcome!");
 });
+
+app.use("/", router)
 
 sequelize.sync({ force: false })    // force가 true면 원래 있던 테이블 drop후 생성
     .then(() => {
