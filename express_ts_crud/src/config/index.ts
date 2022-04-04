@@ -7,7 +7,7 @@ export const config = {
     database: {
         host: process.env.HOST || "",
         port: 3306,
-        username: process.env.USER || "",
+        username: process.env.USERNAME || "",
         password: process.env.PASSWORD || "",
         database: process.env.DATABASE || ""
     },
