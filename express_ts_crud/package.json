@@ -17,6 +17,9 @@
     "dev": "nodemon --watch \"src/**/*.ts\" --exec \"ts-node\" src/app.ts"
   },
   "dependencies": {
+    "@types/morgan": "^1.9.3",
+    "dotenv": "^16.0.0",
+    "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
     "reflect-metadata": "^0.1.13",
