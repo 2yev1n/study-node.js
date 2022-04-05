@@ -1,5 +1,5 @@
 import express, { Request, Response, NextFunction } from 'express';
-import { sequelize } from './config/config';
+import { Post } from './models/post';
 import morgan from "morgan";
 import path from 'path';
 import * as dotenv from "dotenv";
@@ -20,7 +20,7 @@ app.get("/", (req: Request, res: Response, next: NextFunction) => {
 
 app.use("/", router)
 
-sequelize.sync({ force: false })    // force가 true면 원래 있던 테이블 drop후 생성
+Post.sync({ force: false })    // force가 true면 원래 있던 테이블 drop후 생성
     .then(() => {
         console.log("database 연결 성공");
     })
