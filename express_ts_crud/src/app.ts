@@ -22,7 +22,7 @@ app.use("/", router)
 
 Post.sync({ force: false })    // force가 true면 원래 있던 테이블 drop후 생성
     .then(() => {
-        console.log("database 연결 성공");
+        console.log("database 연결 & table 생성 성공");
     })
     .catch((err) => {
         console.error(err);
