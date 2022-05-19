@@ -1,16 +1,14 @@
 const sequelize = require("sequelize");
 
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define('Post', {
+    return sequelize.define('Posts', {
         id : {
             type: DataTypes.INTEGER(),
             primaryKey: true,
-            allowNull: false,
-            unique: true,
             autoIncrement: true,
         },
         writer : {
-            type: DataTypes.STRING(45),
+            type: DataTypes.INTEGER(),
             foreignKey: true,
             allowNull: false,
         },
