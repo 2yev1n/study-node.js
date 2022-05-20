@@ -1,11 +1,12 @@
 const { Post } = require("../models");
 
 const createPost = async(req, res) => {
-    const { writer, title, content, filed } = req.body;
+    const { title, content, filed } = req.body;
+    const user = req.decoded;
 
     try{
         await Post.create({
-            writer,
+            writer : user.id,
             title,
             content,
             filed,
