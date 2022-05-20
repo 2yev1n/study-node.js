@@ -31,11 +31,12 @@ const login = async(req, res) => {
                 email : email
             }
         });
-        
+
         if(user.password == password) {
             const accessToken = jwt.sign({
-                id: id,
-                email: email,
+                id: user.id,
+                email: user.email,
+                name: user.name,
             },
             secretKey,
             {
@@ -53,7 +54,10 @@ const login = async(req, res) => {
             console.error(err);
         }
     } catch(err) {
-
+        res.status(401).json({
+            message: "존재하지 않는 이메일",
+        });
+        console.error(err);
     };
 };
 
