@@ -1,6 +1,6 @@
 const router = require("express")();
 const controller = require("../controllers/delete");
 
-router.post("/delete", controller.deletePost);
+router.delete("/:id", controller.deletePost);
 
 module.exports = router;
