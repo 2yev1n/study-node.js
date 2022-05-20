@@ -1,17 +1,21 @@
 const { Post } = require("../models");
 
 const updatePost = async(req, res) => {
-    const { id, title, content, filed } = req.body;
-
+    const { title, content, filed } = req.body;
+    const id = req.params.id;
+    const user = req.decoded;
     try{
-        await Post.update({
-            title : title,
-            content : content,
-            filed : filed
-        },  
-        {
+        const post = await Post.findOne({
             where : { id : id }
         });
+        if(user.id == post.writer) {
+            post.update({
+                title,
+                content,
+                filed
+            })
+        } else throw Error;
+
         res.status(200).json({
             message: "게시글 수정 완료"
         });
