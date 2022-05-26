@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");   // requset, req.body를 파싱하는 미들웨어
 const cors = require("cors");
+const morgan = require("morgan");
 
 require("dotenv").config({ path: "../.env"});
 
@@ -11,6 +12,7 @@ const corsOptions = {
     origin: "http://localhost:8080"
 };
 
+app.use(morgan('dev'));
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
