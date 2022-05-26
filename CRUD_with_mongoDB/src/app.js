@@ -15,11 +15,10 @@ app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.use("/", require("./app/mongodb/routes/route.ts"));
+app.use("/", require("./routes/router"));
 
 db = require("./models/index");
-    db.mongoose
-        .connect(process.env.URL, {
+    db.mongoose.connect(process.env.URL, {
             // useNewUrlParser: true,
             // useUnifiedTopology: true,
             // useCreateIndex: true, 
@@ -29,6 +28,7 @@ db = require("./models/index");
         .catch((err) => {
             console.error(err);
         });
+        require("./models/practice");
 
 
 app.get("/", (req, res) => {
