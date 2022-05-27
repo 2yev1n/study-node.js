@@ -39,7 +39,32 @@ const create = async(req, res) => {
     };
 };
 
+const update = async(req, res) => {
+    const id = req.params.id;
+    
+    try{
+        const { title } = req.body.title;
+
+        let New = await Practice.findOneAndUpdate(
+            id,
+            title,
+        );
+        New  = await Practice.findOne(id);
+
+        res.status(200).json({
+            message: "수정 성공",
+            New
+        });
+    } catch(err) {
+        console.error(err);
+        res.status(404).json({
+            message: "해당 게시물 없음"
+        });
+    }
+}
+
 module.exports = {
     read,
-    create
+    create,
+    update
 };
