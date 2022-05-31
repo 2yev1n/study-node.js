@@ -25,6 +25,8 @@ const createPost = async(req, res) => {
     
     try{
         practice.title = req.body.title;
+        practice.context = req.body.context;
+
         practice.save(practice);
 
         return res.status(200).json({
@@ -82,7 +84,7 @@ const deletePost = async(req, res) => {
         res.status(200).json({
             message: "게시물 삭제 성공"
         });
-        
+
     } catch(err) {
         console.error(err);
         res.status(404).json({
