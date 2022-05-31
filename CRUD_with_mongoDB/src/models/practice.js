@@ -3,7 +3,8 @@ module.exports = mongoose => {
       'practice',
       mongoose.Schema(
         {
-          title: String
+          title: String,
+          context: String,
         },
         { timestamps: true }
       )
