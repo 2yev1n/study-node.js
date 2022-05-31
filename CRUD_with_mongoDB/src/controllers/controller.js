@@ -45,12 +45,14 @@ const updatePost = async(req, res) => {
     const _id = req.params.id;
     
     try{
-        const { title } = req.body;
+        const { title, context } = req.body;
+
 
         let New = await Practice.update(
             { _id : _id },
             {
-                title: title
+                title: title,
+                context: context
             }
         );
     
