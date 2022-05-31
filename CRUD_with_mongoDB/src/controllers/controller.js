@@ -1,7 +1,7 @@
 const db = require("../models/index");
 const Practice = db.practice;
 
-const read = async(req, res) => {
+const readPost = async(req, res) => {
     
     try{
         const result = await Practice.find();
@@ -20,7 +20,7 @@ const read = async(req, res) => {
     ;
 };
 
-const create = async(req, res) => {
+const createPost = async(req, res) => {
     const practice = new Practice();
     
     try{
@@ -39,7 +39,7 @@ const create = async(req, res) => {
     };
 };
 
-const update = async(req, res) => {
+const updatePost = async(req, res) => {
     const _id = req.params.id;
     
     try{
@@ -69,10 +69,31 @@ const update = async(req, res) => {
             message: "해당 게시물 없음"
         });
     }
+};
+
+const deletePost = async(req, res) => {
+    const _id = req.params.id;
+
+    try{
+        const Post = await Practice.deleteOne(
+            { _id: _id }
+        );
+
+        res.status(200).json({
+            message: "게시물 삭제 성공"
+        });
+        
+    } catch(err) {
+        console.error(err);
+        res.status(404).json({
+            message: "해당 게시물 없음"
+        });
+    };
 }
 
 module.exports = {
-    read,
-    create,
-    update
+    readPost,
+    createPost,
+    updatePost,
+    deletePost
 };
