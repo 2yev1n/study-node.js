@@ -40,16 +40,24 @@ const create = async(req, res) => {
 };
 
 const update = async(req, res) => {
-    const id = req.params.id;
+    const _id = req.params.id;
     
     try{
-        const { title } = req.body.title;
+        const { title } = req.body;
 
-        let New = await Practice.findOneAndUpdate(
-            id,
-            title,
+        let New = await Practice.update(
+            { _id : _id },
+            {
+                title: title
+            }
         );
-        New  = await Practice.findOne(id);
+    
+
+        New  = await Practice.findOne({
+            where: {
+                _id: _id
+            }
+        });
 
         res.status(200).json({
             message: "수정 성공",
