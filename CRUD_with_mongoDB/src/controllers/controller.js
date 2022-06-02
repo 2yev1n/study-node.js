@@ -20,6 +20,26 @@ const readPost = async(req, res) => {
     ;
 };
 
+const readOnePost = async(req, res) => {
+
+    try{
+        const _id = req.params.id;
+        const result = await Practice.find({
+            _id: _id
+        });
+
+        res.status(200).json({
+            message: "조회 성공",
+            result
+        });
+    } catch(err) {
+        console.error(err);
+        return res.status(404).json({
+            message: "조회 실패"
+        });
+    };
+}
+
 const createPost = async(req, res) => {
     const practice = new Practice();
     
@@ -69,7 +89,7 @@ const updatePost = async(req, res) => {
         });
     } catch(err) {
         console.error(err);
-        res.status(404).json({
+        return res.status(404).json({
             message: "해당 게시물 없음"
         });
     }
@@ -89,7 +109,7 @@ const deletePost = async(req, res) => {
 
     } catch(err) {
         console.error(err);
-        res.status(404).json({
+        return res.status(404).json({
             message: "해당 게시물 없음"
         });
     };
@@ -97,6 +117,7 @@ const deletePost = async(req, res) => {
 
 module.exports = {
     readPost,
+    readOnePost,
     createPost,
     updatePost,
     deletePost
