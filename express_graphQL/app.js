@@ -5,15 +5,13 @@ const schema = require("./models/schema");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-var root = {
-    hello: () => {
-        return 'Hello world!';
-    },
-};
+app.set(express.urlencoded({ extended : true }));
+app.set(express.json());
+
 
 app.use("/graphql", graphqlHTTP({
-    schema: schema,
-    rootValue: root,
+    schema: schema.schema,
+    rootValue: schema.root,
     graphiql: true,
 }));
 
