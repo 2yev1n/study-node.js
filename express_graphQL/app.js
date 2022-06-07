@@ -1,6 +1,6 @@
 const graphqlHTTP = require("express-graphql").graphqlHTTP;
 const express = require("express");
-const schema = require("./models/schema");
+const schema = require("./graphql/schema");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -11,7 +11,7 @@ app.set(express.json());
 
 app.use("/graphql", graphqlHTTP({
     schema: schema.schema,
-    rootValue: schema.root,
+    rootValue: schema.resolvers,
     graphiql: true,
 }));
 
