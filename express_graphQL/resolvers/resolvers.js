@@ -35,7 +35,26 @@ const resolvers = {
             } catch (err) {
                 console.error(err);
             };
-        }
+        },
+        updateUser: async (args) => {
+            const { name, email, password } = args;
+            console.log(name, email, password);
+            try{
+                let Newname = await Users.findOne({
+                    where: {
+                        email: email,
+                        password: password
+                    }
+                });
+                
+                Newname = await Newname.update({
+                    name: name
+                });
+                return Newname;
+            } catch(err) {
+                console.error(err);
+            };
+        },
     },
 };
 

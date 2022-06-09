@@ -14,6 +14,11 @@ const schema = buildSchema(`
             email: String!
             password: String!
         ): User
+        updateUser(
+            name: String!
+            email: String!
+            password: String!
+        ): User
     }
 
     type User {
