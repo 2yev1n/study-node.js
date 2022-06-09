@@ -1,2 +1,2 @@
 # post-crud
-게시물 crud
+게시판 만들기
