@@ -1,7 +1,7 @@
 const graphqlHTTP = require("express-graphql").graphqlHTTP;
 const express = require("express");
 const schema = require("./graphql/schema");
-const resolvers = require("./resolvers/resolvers");
+const resolvers  = require("./resolvers/resolvers");
 const { sequelize } = require("./models");
 
 const app = express();
@@ -13,7 +13,7 @@ app.set(express.json());
 
 app.use("/graphql", graphqlHTTP({
     schema: schema,
-    rootValue: resolvers,
+    rootValue: {...resolvers.Query, ...resolvers.Mutation},
     graphiql: true,
 }));
 
