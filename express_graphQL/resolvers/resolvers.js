@@ -1,52 +1,38 @@
 const { Users } = require("../models");
 
 const resolvers = {
-    hello: () => {
-        return 'Hello world!';
-    },
-    world: () => {
-        return '이건 조크';
-    },
     Query: {
         users: async() => {
-            return await Users.all();
+            return await Users.findAll();
         },
-        user: async(_, name) => {
-            return await Users.find({
+        user: async(args) => {
+            const { name } =  args;
+            return await Users.findOne({
                 where: {
                     name: name
                 }
             });
         },
+        hello: () => {
+            return 'Hello world!';
+        },
+        world: () => {
+            return '이건 조크';
+        },
     },
-    User: {
-        id(_, args) {
-            return _.id;
-        },
-        name(_, args) {
-            return _.name;
-        },
-        email(_, args) {
-            return _.email;
-        },
-        password(_, args) {
-            return _.password;
-        }
-    },
-
     Mutation: {
-        async createUser(_, args) {  
-            console.log(args);      
+        createUser: async (args) => {
+            const { name, email, password } = args;
+            console.log(args);
             try {
-                console.log(args);
                 const newUser = await Users.create({
-                    name: args.name,
-                    email: args.email,
-                    password: args.password
+                    name: name,
+                    email: email,
+                    password: password
                 });
-                
+
                 return newUser;
-            } catch(err) {
+            } catch (err) {
                 console.error(err);
             };
         }
