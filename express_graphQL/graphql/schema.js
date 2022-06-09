@@ -13,12 +13,17 @@ const schema = buildSchema(`
             name: String!
             email: String!
             password: String!
-        ): User
+        ): User!
         updateUser(
             name: String!
             email: String!
             password: String!
         ): User
+        deleteUser(
+            name: String!
+            email: String!
+            password: String!
+        ): String!
     }
 
     type User {

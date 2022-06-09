@@ -55,6 +55,21 @@ const resolvers = {
                 console.error(err);
             };
         },
+        deleteUser: async (args) => {
+            const { name, email, password } = args;
+            console.log(name, email, password);
+            try{
+                await Users.destroy({
+                    where: {
+                        email: email,
+                        password: password
+                    }
+                });
+                return "삭제 성공";
+            } catch(err) {
+                console.error(err);
+            }
+        }
     },
 };
 
