@@ -1,10 +1,17 @@
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 3000;
-
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost:27017");
+const PORT = process.env.PORT || 3000;
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+mongoose.connect("mongodb://127.0.0.1:27017",
+{
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+});
 
 const db = mongoose.connection;
 
