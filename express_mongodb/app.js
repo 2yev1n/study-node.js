@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const router = require("./routes/index");
 
 const PORT = process.env.PORT || 3000;
 
@@ -21,6 +22,8 @@ db.on('error', function() {
 db.once('open', function() {
     console.log("연결 성공!");
 });
+
+app.use('/', router);
 
 const server = app.listen(PORT, function() {
     console.log(PORT, "번 포트에서 대기 중");
