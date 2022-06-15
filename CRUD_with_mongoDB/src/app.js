@@ -1,7 +1,8 @@
 const express = require("express");
-const bodyParser = require("body-parser");   // requset, req.body를 파싱하는 미들웨어
+const bodyParser = require("body-parser");   // request, req.body를 파싱하는 미들웨어
 const cors = require("cors");
 const morgan = require("morgan");
+const router = require("./routes/index");
 
 require("dotenv").config({ path: "../.env"});
 
@@ -14,10 +15,10 @@ const corsOptions = {
 
 app.use(morgan('dev'));
 app.use(cors(corsOptions));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.use("/", require("./routes/router"));
+app.use("/", router);
 
 db = require("./models/index");
     db.mongoose.connect(process.env.URL, {
@@ -26,11 +27,11 @@ db = require("./models/index");
             // useCreateIndex: true, 
             // useFindAndModify: false,
         }).then(() => {
-            console.log('MongoDB 연결')})
+            console.log('MongoDB 연결 성공')})
         .catch((err) => {
             console.error(err);
         });
-        require("./models/practice");
+        require("./models");
 
 
 app.get("/", (req, res) => {
