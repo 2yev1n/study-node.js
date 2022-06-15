@@ -1,10 +1,10 @@
-const db = require("../models/index");
-const Practice = db.practice;
+const { Post } = require("../models/post");
+
 
 const readPost = async(req, res) => {
     
     try{
-        const result = await Practice.find();
+        const result = await Post.find();
         
         res.status(200).json({
             message: "조회 성공",
@@ -24,10 +24,10 @@ const readOnePost = async(req, res) => {
 
     try{
         const _id = req.params.id;
-        const result = await Practice.find({
+        const result = await Post.find({
             _id: _id
         });
-
+        
         res.status(200).json({
             message: "조회 성공",
             result
@@ -41,17 +41,17 @@ const readOnePost = async(req, res) => {
 }
 
 const createPost = async(req, res) => {
-    const practice = new Practice();
+    const post = new Post();
     
     try{
-        practice.title = req.body.title;
-        practice.context = req.body.context;
+        post.title = req.body.title;
+        post.content = req.body.content;
 
-        practice.save(practice);
+        post.save(post);
 
         return res.status(200).json({
             message: "작성 성공",
-            practice
+            post
         });
     } catch(err) { 
         console.error(err);
@@ -68,7 +68,7 @@ const updatePost = async(req, res) => {
         const { title, context } = req.body;
 
 
-        let New = await Practice.update(
+        let New = await Post.update(
             { _id : _id },
             {
                 title: title,
@@ -77,7 +77,7 @@ const updatePost = async(req, res) => {
         );
     
 
-        New  = await Practice.findOne({
+        New  = await Post.findOne({
             where: {
                 _id: _id
             }
@@ -99,7 +99,7 @@ const deletePost = async(req, res) => {
     const _id = req.params.id;
 
     try{
-        const Post = await Practice.deleteOne(
+        const Post = await Post.deleteOne(
             { _id: _id }
         );
 
