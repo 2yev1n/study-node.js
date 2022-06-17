@@ -1,11 +1,9 @@
 const chai = require("chai");
-const assert = require("assert");
-const User = require("../controllers/user");
 const chaiHttp = require("chai-http");
 const app = require("../app");
 
 const expect = chai.expect;
-chai.use(chaiHttp)
+chai.use(chaiHttp);
 
 describe("User spec Test", () => {
     it("POST user/ (409)", (done) => {
