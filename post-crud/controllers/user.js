@@ -14,7 +14,7 @@ const signUp = async(req, res) => {
             message: "회원가입 성공",
         });
     } catch (err){
-        res.status(400).json({
+        res.status(409).json({
             message: "중복된 이메일",
         });
         console.error(err);
