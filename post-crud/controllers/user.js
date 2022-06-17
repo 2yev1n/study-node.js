@@ -32,7 +32,7 @@ const login = async(req, res) => {
             }
         });
 
-        if(user.password == password) {
+        if(user.password === password) {
             const accessToken = jwt.sign({
                 id: user.id,
                 email: user.email,
