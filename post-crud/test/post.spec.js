@@ -46,4 +46,31 @@ describe("Post spec Test", () => {
                 done();
             })
     });
+
+    before((done) => {
+        chai
+            .request(app)
+            .post("/user/login")
+            .send({
+                email: "이메일",
+                password: "비밀번호"
+            })
+            .end((err, res) => {
+                token = res.body.accessToken
+                done();
+            })
+    })
+    it("GET post/mypage (200)", (done) => {
+        chai
+            .request(app)
+            .get("/post/mypage")
+            .set("access-token", token)
+            
+            .end((err, res) => {
+                expect(res).to.have.status(200);
+                done();
+            });
+    });
+
+    
 });
