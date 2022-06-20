@@ -4,7 +4,7 @@ const schema = buildSchema(`
     type Query{ 
         hello: String
         world: String
-        user(name: String!): User
+        user(id: Int!): User
         users: [User]
     }
 
