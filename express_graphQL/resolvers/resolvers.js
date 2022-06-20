@@ -6,12 +6,18 @@ const resolvers = {
             return await Users.findAll();
         },
         user: async(args) => {
-            const { name } =  args;
-            return await Users.findOne({
+            const { id } =  args;
+
+            const user = await Users.findOne({
                 where: {
-                    name: name
+                    id: id
                 }
             });
+            
+            if(user == null){
+                throw (new Error("해당 정보 없음"));
+            }
+            else return user;
         },
         hello: () => {
             return 'Hello world!';
