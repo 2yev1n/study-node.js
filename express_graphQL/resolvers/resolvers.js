@@ -13,7 +13,7 @@ const resolvers = {
                     id: id
                 }
             });
-            
+
             if(user == null){
                 throw (new Error("해당 정보 없음"));
             }
@@ -53,10 +53,13 @@ const resolvers = {
                     }
                 });
                 
-                Newname = await Newname.update({
-                    name: name
-                });
-                return Newname;
+                if(Newname == null) throw Error
+                else {
+                    Newname = await Newname.update({
+                        name: name
+                    });
+                    return Newname;   
+                }
             } catch(err) {
                 console.error(err);
             };
@@ -65,13 +68,18 @@ const resolvers = {
             const { name, email, password } = args;
             console.log(name, email, password);
             try{
-                await Users.destroy({
+                const user = await Users.findOne({
                     where: {
                         email: email,
                         password: password
                     }
                 });
-                return "삭제 성공";
+                if(user == null) {
+                    throw Error;
+                } else {
+                    user.destroy();
+                    return "삭제 성공";
+                }
             } catch(err) {
                 console.error(err);
             }
