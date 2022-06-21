@@ -20,6 +20,20 @@ describe('GraphQL', () => {
             });
     });
     
+    it('Returns 이건 조크', (done) => {
+        chai
+            .request(app)
+            .post("/graphql")
+            .send({
+                query: '{ world }'
+            })
+            .end((err, res) => {
+                expect(res.body.data.world)
+                    .to.have.include("이건 조크")
+                    done();
+            });
+    });
+
     it('Returns users', (done) => {
         chai
             .request(app)
