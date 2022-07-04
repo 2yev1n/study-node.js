@@ -16,6 +16,12 @@ app.set("jwt-secret", process.env.SECRET);
 
 app.use("/", router);
 
+app.get("/", (req, res) => {
+    res.json({
+        message: "Hello, World!"
+    });
+})
+
 sequelize.sync({ force : false })
     .then(() => {
         console.log("database 연결 성공")
