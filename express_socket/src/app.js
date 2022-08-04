@@ -1,7 +1,27 @@
-const app = require("express")();
+const express = require("express");
+const dotenv = require("dotenv");
+const cors = require("cors");
+const PORT = process.env.PORT || 8000;
+const path = require("path");
+const app = express();
 const http = require("http").createServer(app);
 const io = require("socket.io")(http);
-const PORT = process.env.PORT || 8000;
+const morgan = require("morgan");
+
+dotenv.config();
+
+app.use(morgan('dev'));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use(cors());
+
+app.listen(PORT, () => {
+    console.log(PORT, "번 포트에서 대기 중");
+});
+
+
 
 let rooms = [];
 let roomName;
@@ -57,7 +77,3 @@ io.on('connection', (socket)=>{
 //     }
 //     return currentRoom;
 // }
-
-http.listen(PORT, () => {
-    console.log(PORT, "번 포트에서 대기 중");
-});
