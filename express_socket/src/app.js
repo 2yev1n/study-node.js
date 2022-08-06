@@ -10,6 +10,7 @@ const morgan = require("morgan");
 
 dotenv.config();
 
+
 app.use(morgan('dev'));
 
 app.use(express.json());
@@ -17,7 +18,20 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(cors());
 
-app.listen(PORT, () => {
+db = require("./models/index");
+    db.mongoose.connect(process.env.URL, {
+            // useNewUrlParser: true,
+            // useUnifiedTopology: true,
+            // useCreateIndex: true, 
+            // useFindAndModify: false,
+        }).then(() => {
+            console.log('MongoDB 연결 성공')})
+        .catch((err) => {
+            console.error(err);
+        });
+        require("./models");
+
+http.listen(PORT, () => {
     console.log(PORT, "번 포트에서 대기 중");
 });
 
