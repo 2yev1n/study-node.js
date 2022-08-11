@@ -20,9 +20,9 @@ app.use(cors());
 db = require("./models/index");
     db.mongoose.connect(process.env.URL, {
             // useNewUrlParser: true,
-            // // useUnifiedTopology: true,
-            // // useCreateIndex: true, 
-            // // useFindAndModify: false,
+            // useUnifiedTopology: true,
+            // useCreateIndex: true, 
+            // useFindAndModify: false,
         }).then(() => {
             console.log('MongoDB 연결 성공')})
         .catch((err) => {
