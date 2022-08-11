@@ -18,6 +18,8 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.set("jwt-secret", process.env.JWTKEY);
+
 app.use("/", router);
 
 db = require("./models/index");
@@ -33,10 +35,6 @@ db = require("./models/index");
         });
         require("./models");
 
-
-app.get("/", (req, res) => {
-    res.json({ message: "Welcome!" });
-});
 
 app.listen(PORT, () => {
     console.log(PORT, '번 포트에서 대기 중');
