@@ -21,7 +21,7 @@ const readPost = async(req, res) => {
 };
 
 const readOnePost = async(req, res) => {
-
+    
     try{
         const _id = req.params.id;
         const result = await Post.find({
@@ -42,10 +42,12 @@ const readOnePost = async(req, res) => {
 
 const createPost = async(req, res) => {
     const post = new Post();
+    const writer = req.decoded._id;
     
     try{
         post.title = req.body.title;
         post.content = req.body.content;
+        post.writer = writer;
 
         post.save(post);
 
