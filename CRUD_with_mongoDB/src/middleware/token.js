@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const tokenMiddleware = async(req, res) => {
+const tokenMiddleware = async(req, res, next) => {
     const token = req.headers["access-token"];
 
     if(!token) {
@@ -16,10 +16,11 @@ const tokenMiddleware = async(req, res) => {
             next();
         });
     } catch(err) {
+        console.error(err);
         res.status(401).json({
             message: "토큰 확인 실패"
         });
     }
 }
 
-module.exports = { tokenMiddleware };
+module.exports = tokenMiddleware;
