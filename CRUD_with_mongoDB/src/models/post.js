@@ -2,7 +2,7 @@ const { ObjectId } = require("mongodb");
 const mongoose = require("mongoose");
 
 const postSchema = new mongoose.Schema({
-  wirter: { type: ObjectId, required: true },
+  writer: { type: ObjectId, required: true },
   title: { type: String, required: true },
   content: { type: String, required: true }
 },{
