@@ -1,7 +1,7 @@
 const { Post } = require("../models/post");
 
 
-const readPost = async(req, res) => {
+const readAllPost = async(req, res) => {
     
     try{
         const result = await Post.find();
@@ -118,7 +118,7 @@ const deletePost = async(req, res) => {
 }
 
 module.exports = {
-    readPost,
+    readAllPost,
     readOnePost,
     createPost,
     updatePost,
