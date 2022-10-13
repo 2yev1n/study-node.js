@@ -16,5 +16,9 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING(),
             allowNull: false,
         },
+        checkingNum: {
+            type: DataTypes.INTEGER(),
+            allowNull: true,
+        }
     });
 };
