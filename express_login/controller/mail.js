@@ -1,35 +1,29 @@
-const nodemailer = require("nodemailer");
-const senderInfo = require("../config/senderinfo.json");
+const mailer = require("../middleware/mail");
+const { User } = require("../models");
 
+const sendMail = async (req, res) => {
+    const { email } = req.body;
+    
+    authNum = Math.random().toString().substr(2,6);
 
-const mailSender = {
-    sendGamil: function(param) {
-        const transport = nodemailer.createTransport({
-            service: 'gmail',
-            host: 'smtp.gmail.com',
-            port: 587,
-            secure: false,
-            requireTLS: true,
-            auth: {
-                user: senderInfo.user,
-                pass: senderInfo.pass
-            }
-        });
-        const mailOptions = {
-            from: senderInfo.user,
-            to: param.toEmail,
-            subject: param.subject,
-            text: param.text
-        };
+    User.update({
+        checkingNum : authNum
+    },{
+        where: { email }
+    });
 
-        transport.sendMail(mailOptions, function(error, info) {
-            if(error) {
-                console.error(error);
-            } else{
-                console.log('Email sent: ' + info.response);
-            }
-        });
-    }
-}
+    const emailParam = {
+        toEmail: email,
+        subject: "New Email",
+        text: authNum
+    };
 
-module.exports = mailSender;
+    mailer.sendGamil(emailParam);
+
+    res.status(200).send("이메일 발송 성공");
+    console.log(authNum);
+};
+
+module.exports = {
+    sendMail
+};
